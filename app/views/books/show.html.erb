@@ -1,26 +1,27 @@
 <div id="books-show">
-    <h2>Ruby On Rails Power </h2>
+    <h2><%= @book.title %> </h2>
     <div class="books-show-left">
-      <%= image_tag('covers/ruby_on_rails_power.jpg') %>
+      <%= image_tag(@book.coverpath) %>
     </div>
     <div class="books-show-right">
       <h3>Book info:</h3>
       <ul>
-        <li><strong>Category: </strong>Ruby On Rails</li>
-        <li><strong>Author: </strong> Aneesha Bakharia</li>
-        <li><strong>Publisher: </strong>Course Technology PTR</li>
-        <li><strong>Year: </strong>2007</li>
-        <li><strong>ISBN: </strong>2173896289</li>
-        <li><strong>Format: </strong>Paperback</li>
-        <li><strong>Pages: </strong>678</li>
+        <li><strong>Category: </strong><%= @book.category.name %></li>
+        <li><strong>Author: </strong><%= @book.author.first_name %> <%= @book.author.last_name %></li>
+        <li><strong>Publisher: </strong><%= @book.publisher.name %></li>
+        <li><strong>Year: </strong><%= @book.year %></li>
+        <li><strong>ISBN: </strong><%= @book.isbn %></li>
+        <li><strong>Format: </strong><%= @book.format %></li>
+        <li><strong>Pages: </strong><%= @book.pages %></li>
       </ul>
-      <%= link_to "Buy for $10",'http://www.amazon.com/Ruby-Rails-Power-Comprehensive-Guide/dp/1598632167',
+      <%= link_to "Buy for "+@book.price, @book.buy,
                   class:'btn btn-success', target: 'blank' %>
     </div>
     <div class="clearfix"> </div>
     <h4>Excerprt</h4>
-    <p>
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-    </p>
+    <p><%= @book.excerpt %></p>
+    <h3>Admin Functions</h3>
+    <%= link_to 'Edit', edit_book_path(@book.id) %> | <%= link_to 'Delete',
+                                                      book_path(@book), method: :delete,
+                                                      data: {confirm: 'Are you sure you want to delete this book'} %>
 </div>
